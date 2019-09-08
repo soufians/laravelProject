@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\Post;
 class PagesController extends Controller
 {
     public function index() {
-        $title = 'welcome in index';
-        $body = 'the body varible';
-//        return view('pages.index',compact('title'));// or
-        return view('pages.index')->with('title',$title);
+        $posts = Post::orderBy('created_at','desc')->paginate(3); // desc/asc title created_at
+        // $posts = Post::all();
+        // return $posts;
 
+        return view('pages.index')->with('posts',$posts);
     }
     public function about() {
         $title = 'welcome in about';

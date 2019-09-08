@@ -9,6 +9,17 @@ use App\Post;
 //use DB; //we add it if we want to write our query
 class PostsController extends Controller
 {
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +34,8 @@ class PostsController extends Controller
         //$posts = Post::orderBy('title','asc')->take(1)->get(); //we use take when we want to return n posts.
         //$posts = Post::orderBy('title','asc')->get(); // desc/asc
         $posts = Post::orderBy('created_at','desc')->paginate(3); // desc/asc title created_at
-        return view('posts.index')->with('posts',$posts);
+        // return $posts;
+        return view('posts/index')->with('posts',$posts);
     }
 
     /**
@@ -52,9 +64,10 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->user_id = auth()->user()->id;
         $post->save();
-
-        return redirect('/posts')->with('success', 'Post Created');
+        
+        return redirect('/dashboard')->with('success', 'Post Created');
     }
 
     /**
@@ -112,6 +125,6 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Removed');
+        return redirect('/dashboard')->with('success', 'Post Removed');
     }
 }
