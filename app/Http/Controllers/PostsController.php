@@ -6,20 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Post;
+use App\User;
+
 //use DB; //we add it if we want to write our query
 class PostsController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except'=>['show']]);
     }
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +35,9 @@ class PostsController extends Controller
         // return Post::where('title','Post one')->get(); // return by the title
         //$posts = Post::orderBy('title','asc')->take(1)->get(); //we use take when we want to return n posts.
         //$posts = Post::orderBy('title','asc')->get(); // desc/asc
-        $posts = Post::orderBy('created_at','desc')->paginate(3); // desc/asc title created_at
+        // $posts = Post::orderBy('created_at','desc')->paginate(3); // desc/asc title created_at
         // return $posts;
-        return view('posts/index')->with('posts',$posts);
+        // return view('pages/index')->with('posts',$posts);
     }
 
     /**
@@ -76,10 +78,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        // return Post::find($id);
+
         $post = Post::find($id);
+        // $userId = $post->user_id;
         return view('posts.show')->with('post',$post);
     }
 
@@ -113,7 +117,8 @@ class PostsController extends Controller
         $post->content = $request->input('content');
         $post->save();
 
-        return redirect('/posts')->with('success', 'Post Updated');    }
+        return redirect('/dashboard')->with('success', 'Post Updated');  
+      }
 
     /**
      * Remove the specified resource from storage.

@@ -43,7 +43,17 @@ Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
 Route::get('/services','PagesController@services');
 
-Route::resource('posts','PostsController');
 Route::auth('/');
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::resource('posts','PostsController');
+Route::resource('users','UsersController');
+
+
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm');
+Route::post('/admin/login', 'Auth\AdminLoginController@login');
+
+Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+
+Route::get('/admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');

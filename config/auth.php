@@ -17,7 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-
+    // Auth::guard('admin')->check($credentials)
+    // Auth::check($credentials) // like email or password return true of false
+    // Auth::attempt()
+    // Auth::once() 
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -45,6 +48,15 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -68,6 +80,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
         ],
 
         // 'users' => [
@@ -102,6 +118,13 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        'admins' => [
+            'provider' => 'admins',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
     ],
+    
 
 ];

@@ -287,6 +287,7 @@ class ComposerStaticInit665678d8e57174283315f2c9545e04fe
 
     public static $classMap = array (
         'AddUserIdToPosts' => __DIR__ . '/../..' . '/database/migrations/2019_09_07_111436_add_user_id_to_posts.php',
+        'CreateAdminsTable' => __DIR__ . '/../..' . '/database/migrations/2019_09_09_031835_create_admins_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2019_09_05_043903_create_posts_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',

@@ -4,15 +4,17 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
+
+    protected $guard = 'admin'; 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -24,8 +26,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function posts(){
-        return $this->hasMany('App\Post');
-    }
     
 }

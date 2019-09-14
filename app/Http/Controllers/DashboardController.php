@@ -8,15 +8,6 @@ use App\User;
 class DashboardController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -26,5 +17,17 @@ class DashboardController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         return view('dashboard')->with('posts', $user->posts);
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+        return view('users.show')->with('user',$user);
     }
 }

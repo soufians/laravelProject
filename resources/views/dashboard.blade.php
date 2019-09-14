@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="padding-left: 0px; padding-right: 30px;">
@@ -28,6 +29,7 @@
                     @else 
                         <p>You have no posts</p>
                     @endif
+
                 </div>
             </div>
         </div>
